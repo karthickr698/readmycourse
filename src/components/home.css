@@ -1,0 +1,40 @@
+.status{
+    width: 100%;
+    height: 4rem;
+    background-color: #EAF6F8;
+}
+.cont{
+    display: flex;
+}
+.main{
+    background-color: #D3EEF1;
+    width: 100%;
+    height: 50rem;
+}
+.side{
+    width: 30rem;
+    height: 50rem;
+    background-color: #005284;
+}
+.tabs{
+    margin-top: 2rem;
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+    padding-left: 20px;
+}
+.nav-item{
+    margin: 0 1px;
+    background-color: #009DAE;
+    color:#D3EEF1;
+}
+.nav-link{
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 300px;
+    color:#D3EEF1
+}
+.sidebars{
+    padding: 10px;
+    margin-top: 2rem;
+}
