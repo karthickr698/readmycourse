@@ -1,66 +1,160 @@
-import React, { Component } from 'react'
-import CanvasJSReact from '../canvasjs.react'
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import React from "react";
+import { Doughnut, Radar, Bar } from "react-chartjs-2";
 
-export default class Contribution extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            dPoints: ''
-        }
-    }
+require ('./RoundedBars.js')
 
-    componentDidMount = () => {
-        const { data } = this.props
-        let obj = {}
+const chart = ({ averageValue }) => {
+  const stateRadar = {
+    labels: ["Purpose","Anatomy", "Trust", "Wellbeing", "Mastery"],
+    datasets: [
+      {
+        label: "Rainfall",
+        backgroundColor: [
+          "#B21F00",
+          "#C9DE00",
+          "#2FDE00",
+          "#00A6B4",
+          "#6800B4",
+        ],
+        hoverBackgroundColor: [
+          "#501800",
+          "#4B5000",
+          "#175000",
+          "#003350",
+          "#35014F",
+        ],
+        data: [1.0, 1.2, 0.8, 1.2, 1.0],
+      },
+    ],
+  };
+  const stateBar = {
+    labels: ["Anatomy","Purpose", "Mastery", "Wellbeing", "Trust"],
+    datasets: [
+      {
+        barThickness: 70,
+        backgroundColor: [
+          "#EE2326",
+          "#EE2326",
+          "#EE2326",
+          "#EE2326",
+          "#EE2326",
+        ],
+        hoverBackgroundColor: [
+          "#EC6666",
+          "#EC6666",
+          "#EC6666",
+          "#EC6666",
+          "#EC6666",
+        ],
+        data: [1.0, 0.6, 0.8, 1.2, 1.0],
+      },
+    ],
+  };
+  const stateSelf = {
+    labels: ["Mastery", "Anatomy", "Purpose"],
+    datasets: [
+      {
+        label: "Rainfall",
+        backgroundColor: [
+          "#147AD6",
+          "#79D2DE",
+          "#EC6666"
+        ],
+        hoverBackgroundColor: [
+          "#501800",
+          "#4B5000",
+          "#175000"
+        ],
+        data: [35.84,28.49,35.67],
+      },
+    ],
+  };
+  const state = {
+    labels: ["Wellbeing", "Trust", "Work Challenge"],
+    datasets: [
+      {
+        label: "Rainfall",
+        backgroundColor: [
+          "#005284",
+          "#EE2326",
+          "#009DAE"
+        ],
+        hoverBackgroundColor: [
+          "#501800",
+          "#4B5000",
+          "#175000"
+        ],
+        data: [65, 59, 80],
+      },
+    ],
+  };
 
-        for (let i = 0; i < data.length; i++) {
-            if (!(data[i].type in obj)) {
-                obj[data[i].type] = 1
-            }
-            else {
-                obj[data[i].type]++
-            }
-        }
-
-        let dPoints = []
-        for (const property in obj) {
-            let temp = {}
-            temp["y"] = obj[property]
-            temp["label"] = property
-            dPoints.push(temp)
-        }
-        this.setState({
-            dPoints: dPoints,
-        })
-    }
-
-    render() {
-        const options = {
-            animationEnabled: true,
-            theme: "dark1",
+  return (
+    <div>
+      <div className="top">
+        <Radar
+          data={stateRadar}
+          options={{
             title: {
-                text: "Contribution"
+              display: true,
+              text: "Overall Immersion",
+              fontSize: 20,
             },
-            axisX: {
-                title: "Localities",
-                reversed: true,
+            legend: {
+              display: true,
+              position: "right",
             },
-            axisY: {
-                title: "Number of people",
-                includeZero: true,
-                labelFormatter: this.addSymbols
+          }}
+        />
+
+        <Bar
+          data={stateBar}
+          options={{
+            cornerRadius: 10,
+            title: {
+              display: true,
+              text: "Overall Immersion",
+              fontSize: 20,
             },
-            data: [{
-                type: "bar",
-                dataPoints: this.state.dPoints
-            }]
-        }
-        return (
-            <div className='p-5'>
-                <CanvasJSChart options={options} />
-            </div>
-        );
-    }
-}
+            legend: {
+              display: true,
+              position: "right",
+            },
+          }}
+        />
+      </div>
+
+      <Doughnut
+        data={stateSelf}
+        options={{
+          title: {
+            display: true,
+            text: "Overall Immersion",
+            fontSize: 20,
+          },
+          legend: {
+            display: true,
+            position: "right",
+          },
+        }}
+      />
+
+      <Doughnut
+        data={state}
+        options={{
+          title: {
+            display: true,
+            text: "Overall Immersion",
+            fontSize: 20,
+          },
+          legend: {
+            display: true,
+            position: "right",
+          },
+        }}
+      />
+    </div>
+  );
+};
+
+export default chart;

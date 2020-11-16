@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Contribution from './Contribution'
+import Chart from './Contribution'
 
 export default class Reports extends Component {
     render() {
@@ -7,10 +7,7 @@ export default class Reports extends Component {
         const { reportData } = this.props
         return (
             <div>
-                gg
-                <Contribution data={reportData} />
-                {/*<PeopleByLocality />
-                <Count /> */}
+                <Chart />
             </div>
         )
     }
